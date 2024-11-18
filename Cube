@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_cube/flutter_cube.dart';
+
+void main() => runApp(MyCubeApp());
+
+class MyCubeApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Cube App',
+      home: CubeScreen(),
+    );
+  }
+}
+
+class CubeScreen extends StatefulWidget {
+  @override
+  _CubeScreenState createState() => _CubeScreenState();
+}
+
+class _CubeScreenState extends State<CubeScreen> {
+  late Object cube;
+
+  @override
+  void initState() {
+    super.initState();
+    cube = Object(
+      fileName: 'assets/cube.obj',
+      scale: Vector3(7.0, 7.0, 7.0),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Cube(
+        onSceneCreated: (Scene scene) {
+          scene.world.add(cube);
+          scene.camera.position.z = 5;
+        },
+      ),
+    );
+  }
+}
